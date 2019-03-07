@@ -1,5 +1,7 @@
 <?php
+
 namespace App\EventSubscriber;
+
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -7,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 final class UserEventSubscriber implements EventSubscriberInterface
 {
     private $passwordEncorder;

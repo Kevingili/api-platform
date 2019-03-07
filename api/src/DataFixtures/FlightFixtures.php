@@ -24,7 +24,7 @@ class FlightFixtures extends Fixture implements DependentFixtureInterface
             $flight->setArrivalAirport($airports[rand(0, count($airports)-1)]);
             $flight->setDepartureDate($faker->dateTimeInInterval('now', '+1 day'));
             $flight->setArrivalDate($faker->dateTimeInInterval('+1 day', '+2 days'));
-            $flight->setNumber($faker->randomNumber(6));
+            $flight->setNumber($faker->randomNumber(6, true));
             $flight->setPlane($planes[mt_rand(0,4)]);
 
             $manager->persist($flight);
