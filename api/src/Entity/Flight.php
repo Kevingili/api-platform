@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource()
@@ -27,11 +28,15 @@ class Flight
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime
      */
     private $departureDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime
+     * @Assert\GreaterThanOrEqual(propertyPath="departureDate")
+     *
      */
     private $arrivalDate;
 
@@ -60,22 +65,35 @@ class Flight
      */
     private $arrivalAirport;
 
+    /**
+     * Flight constructor.
+     */
     public function __construct()
     {
         $this->personnals = new ArrayCollection();
         $this->passenger = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return int|null
+     */
     public function getNumber(): ?int
     {
         return $this->number;
     }
 
+    /**
+     * @param int $number
+     * @return Flight
+     */
     public function setNumber(int $number): self
     {
         $this->number = $number;
@@ -83,11 +101,18 @@ class Flight
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getDepartureDate(): ?\DateTimeInterface
     {
         return $this->departureDate;
     }
 
+    /**
+     * @param \DateTimeInterface $departureDate
+     * @return Flight
+     */
     public function setDepartureDate(\DateTimeInterface $departureDate): self
     {
         $this->departureDate = $departureDate;
@@ -95,11 +120,18 @@ class Flight
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getArrivalDate(): ?\DateTimeInterface
     {
         return $this->arrivalDate;
     }
 
+    /**
+     * @param \DateTimeInterface $arrivalDate
+     * @return Flight
+     */
     public function setArrivalDate(\DateTimeInterface $arrivalDate): self
     {
         $this->arrivalDate = $arrivalDate;
@@ -107,11 +139,18 @@ class Flight
         return $this;
     }
 
+    /**
+     * @return Plane|null
+     */
     public function getPlane(): ?Plane
     {
         return $this->plane;
     }
 
+    /**
+     * @param Plane|null $plane
+     * @return Flight
+     */
     public function setPlane(?Plane $plane): self
     {
         $this->plane = $plane;
@@ -127,6 +166,10 @@ class Flight
         return $this->personnals;
     }
 
+    /**
+     * @param Personnal $personnal
+     * @return Flight
+     */
     public function addPersonnal(Personnal $personnal): self
     {
         if (!$this->personnals->contains($personnal)) {
@@ -137,6 +180,10 @@ class Flight
         return $this;
     }
 
+    /**
+     * @param Personnal $personnal
+     * @return Flight
+     */
     public function removePersonnal(Personnal $personnal): self
     {
         if ($this->personnals->contains($personnal)) {
@@ -155,6 +202,10 @@ class Flight
         return $this->passenger;
     }
 
+    /**
+     * @param Passenger $passenger
+     * @return Flight
+     */
     public function addPassenger(Passenger $passenger): self
     {
         if (!$this->passenger->contains($passenger)) {
@@ -165,6 +216,10 @@ class Flight
         return $this;
     }
 
+    /**
+     * @param Passenger $passenger
+     * @return Flight
+     */
     public function removePassenger(Passenger $passenger): self
     {
         if ($this->passenger->contains($passenger)) {
@@ -178,11 +233,18 @@ class Flight
         return $this;
     }
 
+    /**
+     * @return Airport|null
+     */
     public function getDepartureAirport(): ?Airport
     {
         return $this->departureAirport;
     }
 
+    /**
+     * @param Airport|null $departureAirport
+     * @return Flight
+     */
     public function setDepartureAirport(?Airport $departureAirport): self
     {
         $this->departureAirport = $departureAirport;
@@ -190,11 +252,18 @@ class Flight
         return $this;
     }
 
+    /**
+     * @return Airport|null
+     */
     public function getArrivalAirport(): ?Airport
     {
         return $this->arrivalAirport;
     }
 
+    /**
+     * @param Airport|null $arrivalAirport
+     * @return Flight
+     */
     public function setArrivalAirport(?Airport $arrivalAirport): self
     {
         $this->arrivalAirport = $arrivalAirport;
