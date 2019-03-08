@@ -6,6 +6,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
  * @ApiResource()
@@ -22,11 +24,13 @@ class Company
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Plane", mappedBy="company")
+     * @ApiSubresource
      */
     private $planes;
 
@@ -35,22 +39,35 @@ class Company
      */
     private $personnals;
 
+    /**
+     * Company constructor.
+     */
     public function __construct()
     {
         $this->planes = new ArrayCollection();
         $this->personnals = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return null|string
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return Company
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -66,6 +83,10 @@ class Company
         return $this->planes;
     }
 
+    /**
+     * @param Plane $plane
+     * @return Company
+     */
     public function addPlane(Plane $plane): self
     {
         if (!$this->planes->contains($plane)) {
@@ -76,6 +97,10 @@ class Company
         return $this;
     }
 
+    /**
+     * @param Plane $plane
+     * @return Company
+     */
     public function removePlane(Plane $plane): self
     {
         if ($this->planes->contains($plane)) {
@@ -97,6 +122,10 @@ class Company
         return $this->personnals;
     }
 
+    /**
+     * @param Personnal $personnal
+     * @return Company
+     */
     public function addPersonnal(Personnal $personnal): self
     {
         if (!$this->personnals->contains($personnal)) {
@@ -107,6 +136,10 @@ class Company
         return $this;
     }
 
+    /**
+     * @param Personnal $personnal
+     * @return Company
+     */
     public function removePersonnal(Personnal $personnal): self
     {
         if ($this->personnals->contains($personnal)) {
