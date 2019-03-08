@@ -11,6 +11,7 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * Entreprise
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
  * @UniqueEntity("name")
@@ -18,6 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Company
 {
     /**
+     * @var integer id
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -25,18 +27,21 @@ class Company
     private $id;
 
     /**
+     * @var string name
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
     private $name;
 
     /**
+     * @var Plane planes
      * @ORM\OneToMany(targetEntity="App\Entity\Plane", mappedBy="company")
      * @ApiSubresource
      */
     private $planes;
 
     /**
+     * @var Personnal personnals
      * @ORM\OneToMany(targetEntity="App\Entity\Personnal", mappedBy="company")
      */
     private $personnals;

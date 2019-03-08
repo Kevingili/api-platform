@@ -7,12 +7,14 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Valises
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\LuggageRepository")
  */
 class Luggage
 {
     /**
+     * @var integer id
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -20,6 +22,7 @@ class Luggage
     private $id;
 
     /**
+     * @var integer weight
      * @ORM\Column(type="float")
      * @Assert\NotBlank
      * @Assert\Range(min=1,max=30)
@@ -27,6 +30,7 @@ class Luggage
     private $weight;
 
     /**
+     * @var Passenger passenger
      * @ORM\ManyToOne(targetEntity="App\Entity\Passenger", inversedBy="luggage")
      */
     private $passenger;

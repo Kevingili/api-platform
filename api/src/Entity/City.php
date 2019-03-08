@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
+ * Ville
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\CityRepository")
  * @UniqueEntity(fields={"name"})
@@ -19,6 +20,7 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 class City
 {
     /**
+     * @var integer id
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -26,18 +28,21 @@ class City
     private $id;
 
     /**
+     * @var string name
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
     private $name;
 
     /**
+     * @var string country
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
     private $country;
 
     /**
+     * @var Airport airports
      * @ORM\OneToMany(targetEntity="App\Entity\Airport", mappedBy="city")
      * @ApiSubresource()
      */

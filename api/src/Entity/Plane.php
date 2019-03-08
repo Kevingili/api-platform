@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * Avion en francais :)
  * @ApiResource
  * @ORM\Entity(repositoryClass="App\Repository\PlaneRepository")
  * @UniqueEntity("model")
@@ -26,7 +27,7 @@ class Plane
     private $id;
 
     /**
-     * @var string model
+     * @var string model (ex: Airbus 380)
      * @ORM\Column(type="string", length=255)
      * @CorrectName
      * @Assert\Length(min="6", minMessage="Minimum 6 characters")

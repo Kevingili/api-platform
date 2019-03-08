@@ -14,7 +14,7 @@ class PersonnalFixtures extends Fixture implements DependentFixtureInterface
     {
 
         $faker = Faker\Factory::create('fr_FR');
-        $functions = ['Pilot', 'Copilot', 'Steward', 'Hostess'];
+        $functions = ['Pilot', 'Copilot', 'Hostess'];
 
         $companies = $manager->getRepository('App:Company')->findAll();
         $flights = $manager->getRepository('App:Flight')->findAll();

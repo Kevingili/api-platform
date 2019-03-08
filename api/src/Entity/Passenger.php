@@ -11,6 +11,7 @@ use App\Validator\Constraints\CorrectGender; // A custom constraint
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Passagers
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\PassengerRepository")
  */

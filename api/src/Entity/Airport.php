@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * Aéroport
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\AirportRepository")
  * @UniqueEntity("name")
@@ -17,6 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Airport
 {
     /**
+     * @var integer id
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -24,22 +26,26 @@ class Airport
     private $id;
 
     /**
+     * @var string name nom de l'aéroport
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
     private $name;
 
     /**
+     * @var string city ville
      * @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="airports")
      */
     private $city;
 
     /**
+     * @var Flight flightsDeparture
      * @ORM\OneToMany(targetEntity="App\Entity\Flight", mappedBy="departureAirport")
      */
     private $flightsDeparture;
 
     /**
+     * @var Flight flightsArrival
      * @ORM\OneToMany(targetEntity="App\Entity\Flight", mappedBy="arrivalAirport")
      */
     private $flightsArrival;

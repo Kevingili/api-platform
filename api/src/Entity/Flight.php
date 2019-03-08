@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * Vol
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\FlightRepository")
  * @UniqueEntity("number")
