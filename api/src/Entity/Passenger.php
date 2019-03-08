@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Validator\Constraints\CorrectGender; // A custom constraint
 
 /**
  * @ApiResource()
@@ -32,6 +33,7 @@ class Passenger
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @CorrectGender
      */
     private $gender;
 
@@ -50,21 +52,34 @@ class Passenger
      */
     private $flight;
 
+    /**
+     * Passenger constructor.
+     */
     public function __construct()
     {
         $this->luggage = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return null|string
+     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
+    /**
+     * @param string $firstname
+     * @return Passenger
+     */
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
@@ -72,11 +87,18 @@ class Passenger
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
+    /**
+     * @param string $lastname
+     * @return Passenger
+     */
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
@@ -84,11 +106,18 @@ class Passenger
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getGender(): ?string
     {
         return $this->gender;
     }
 
+    /**
+     * @param string $gender
+     * @return Passenger
+     */
     public function setGender(string $gender): self
     {
         $this->gender = $gender;
@@ -96,11 +125,18 @@ class Passenger
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getBirthdate(): ?\DateTimeInterface
     {
         return $this->birthdate;
     }
 
+    /**
+     * @param \DateTimeInterface $birthdate
+     * @return Passenger
+     */
     public function setBirthdate(\DateTimeInterface $birthdate): self
     {
         $this->birthdate = $birthdate;
@@ -116,6 +152,10 @@ class Passenger
         return $this->luggage;
     }
 
+    /**
+     * @param Luggage $luggage
+     * @return Passenger
+     */
     public function addLuggage(Luggage $luggage): self
     {
         if (!$this->luggage->contains($luggage)) {
@@ -126,6 +166,10 @@ class Passenger
         return $this;
     }
 
+    /**
+     * @param Luggage $luggage
+     * @return Passenger
+     */
     public function removeLuggage(Luggage $luggage): self
     {
         if ($this->luggage->contains($luggage)) {
@@ -139,11 +183,18 @@ class Passenger
         return $this;
     }
 
+    /**
+     * @return Flight|null
+     */
     public function getFlight(): ?Flight
     {
         return $this->flight;
     }
 
+    /**
+     * @param Flight|null $flight
+     * @return Passenger
+     */
     public function setFlight(?Flight $flight): self
     {
         $this->flight = $flight;
