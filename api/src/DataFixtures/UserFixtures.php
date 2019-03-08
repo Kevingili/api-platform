@@ -23,12 +23,14 @@ class UserFixtures extends Fixture
         $user->setEmail("kevin@mail.fr");
         $user->setFirstname("kevin");
         $user->setLastname("gilibert");
+        $user->setUsername("kevin");
         $user->setPassword($this->encoder->encodePassword($user, "password"));
         $manager->persist($user);
 
         $user2 = new User();
         $user2->setEmail("tarshan@mail.fr");
         $user2->setFirstname("tarshan");
+        $user2->setUsername("tarshan");
         $user2->setLastname("tarshan");
         $user2->setPassword($this->encoder->encodePassword($user, "password"));
         $manager->persist($user2);

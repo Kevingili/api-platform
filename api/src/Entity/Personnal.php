@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Personnal
 {
     /**
+     * @var integer id
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -22,23 +23,27 @@ class Personnal
     private $id;
 
     /**
+     * @var string name
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
     private $name;
 
     /**
+     * @var string function
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
     private $function;
 
     /**
+     * @var Flight flight
      * @ORM\ManyToMany(targetEntity="App\Entity\Flight", inversedBy="personnals")
      */
     private $flight;
 
     /**
+     * @var Company company
      * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="personnals")
      */
     private $company;

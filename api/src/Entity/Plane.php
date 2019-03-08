@@ -18,6 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Plane
 {
     /**
+     * @var integer id
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -25,6 +26,7 @@ class Plane
     private $id;
 
     /**
+     * @var string model
      * @ORM\Column(type="string", length=255)
      * @CorrectName
      * @Assert\Length(min="6", minMessage="Minimum 6 characters")
@@ -33,6 +35,7 @@ class Plane
     private $model;
 
     /**
+     * @var integer seatNumber
      * @ORM\Column(type="integer")
      * @Assert\NotBlank
      * @Assert\GreaterThan(0)
@@ -41,17 +44,20 @@ class Plane
     private $seatNumber;
 
     /**
+     * @var DateTime dateCommissioning
      * @ORM\Column(type="datetime")
      * @Assert\DateTime
      */
     private $dateCommissioning;
 
     /**
+     * @var Flight flight
      * @ORM\OneToMany(targetEntity="App\Entity\Flight", mappedBy="plane")
      */
     private $flight;
 
     /**
+     * @var Company company
      * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="planes")
      */
     private $company;

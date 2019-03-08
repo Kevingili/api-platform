@@ -22,6 +22,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class User implements UserInterface
 {
     /**
+     * @var integer id
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -29,6 +30,7 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @var string email
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email(message="Email not valid")
      * @Assert\NotBlank
@@ -37,6 +39,7 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @var array roles
      * @ORM\Column(type="json")
      * @Groups("write")
      */
@@ -51,6 +54,7 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var string firstname
      * @ORM\Column(type="string", length=255)
      * @Groups({"read", "write"})
      * @Assert\NotBlank
@@ -58,11 +62,19 @@ class User implements UserInterface
     private $firstname;
 
     /**
+     * @var string lastname
      * @ORM\Column(type="string", length=255)
      * @Groups({"read", "write"})
      * @Assert\NotBlank
      */
     private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Groups({"write", "read"})
+     */
+    public $username;
 
     /**
      * @return int
@@ -71,6 +83,7 @@ class User implements UserInterface
     {
         return $this->id;
     }
+
 
     /**
      * @return string
@@ -96,10 +109,19 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
-        return (string) $this->email;
+        return $this->username;
     }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+
 
     /**
      * @see UserInterface

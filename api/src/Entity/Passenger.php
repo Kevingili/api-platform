@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Validator\Constraints\CorrectGender; // A custom constraint
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\PassengerRepository")
@@ -15,6 +17,7 @@ use App\Validator\Constraints\CorrectGender; // A custom constraint
 class Passenger
 {
     /**
+     * @var integer id
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -22,35 +25,41 @@ class Passenger
     private $id;
 
     /**
+     * @var string firstname
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
     private $firstname;
 
     /**
+     * @var string lastname
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
     private $lastname;
 
     /**
+     * @var string gender
      * @ORM\Column(type="string", length=20)
      * @CorrectGender
      */
     private $gender;
 
     /**
+     * @var DateTime birthday
      * @ORM\Column(type="datetime")
      * @Assert\DateTime
      */
     private $birthdate;
 
     /**
+     * @var Luggage luggage
      * @ORM\OneToMany(targetEntity="App\Entity\Luggage", mappedBy="passenger")
      */
     private $luggage;
 
     /**
+     * @var Flight flight
      * @ORM\ManyToOne(targetEntity="App\Entity\Flight", inversedBy="passenger")
      */
     private $flight;
