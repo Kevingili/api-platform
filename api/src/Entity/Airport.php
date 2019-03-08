@@ -6,10 +6,13 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\AirportRepository")
+ * @UniqueEntity("name")
  */
 class Airport
 {
@@ -22,6 +25,7 @@ class Airport
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -40,22 +44,35 @@ class Airport
      */
     private $flightsArrival;
 
+    /**
+     * Airport constructor.
+     */
     public function __construct()
     {
         $this->flightsDeparture = new ArrayCollection();
         $this->flightsArrival = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return null|string
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return Airport
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -63,11 +80,18 @@ class Airport
         return $this;
     }
 
+    /**
+     * @return City|null
+     */
     public function getCity(): ?City
     {
         return $this->city;
     }
 
+    /**
+     * @param City|null $city
+     * @return Airport
+     */
     public function setCity(?City $city): self
     {
         $this->city = $city;
@@ -83,6 +107,10 @@ class Airport
         return $this->flightsDeparture;
     }
 
+    /**
+     * @param Flight $flightsDeparture
+     * @return Airport
+     */
     public function addFlightsDeparture(Flight $flightsDeparture): self
     {
         if (!$this->flightsDeparture->contains($flightsDeparture)) {
@@ -93,6 +121,10 @@ class Airport
         return $this;
     }
 
+    /**
+     * @param Flight $flightsDeparture
+     * @return Airport
+     */
     public function removeFlightsDeparture(Flight $flightsDeparture): self
     {
         if ($this->flightsDeparture->contains($flightsDeparture)) {
@@ -114,6 +146,10 @@ class Airport
         return $this->flightsArrival;
     }
 
+    /**
+     * @param Flight $flightsArrival
+     * @return Airport
+     */
     public function addFlightsArrival(Flight $flightsArrival): self
     {
         if (!$this->flightsArrival->contains($flightsArrival)) {
@@ -124,6 +160,10 @@ class Airport
         return $this;
     }
 
+    /**
+     * @param Flight $flightsArrival
+     * @return Airport
+     */
     public function removeFlightsArrival(Flight $flightsArrival): self
     {
         if ($this->flightsArrival->contains($flightsArrival)) {
