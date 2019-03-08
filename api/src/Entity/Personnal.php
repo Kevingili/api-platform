@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource()
@@ -22,11 +23,13 @@ class Personnal
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $function;
 
@@ -40,21 +43,34 @@ class Personnal
      */
     private $company;
 
+    /**
+     * Personnal constructor.
+     */
     public function __construct()
     {
         $this->flight = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return null|string
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return Personnal
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -62,11 +78,18 @@ class Personnal
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getFunction(): ?string
     {
         return $this->function;
     }
 
+    /**
+     * @param string $function
+     * @return Personnal
+     */
     public function setFunction(string $function): self
     {
         $this->function = $function;
@@ -82,6 +105,10 @@ class Personnal
         return $this->flight;
     }
 
+    /**
+     * @param Flight $flight
+     * @return Personnal
+     */
     public function addFlight(Flight $flight): self
     {
         if (!$this->flight->contains($flight)) {
@@ -91,6 +118,10 @@ class Personnal
         return $this;
     }
 
+    /**
+     * @param Flight $flight
+     * @return Personnal
+     */
     public function removeFlight(Flight $flight): self
     {
         if ($this->flight->contains($flight)) {
@@ -100,11 +131,18 @@ class Personnal
         return $this;
     }
 
+    /**
+     * @return Company|null
+     */
     public function getCompany(): ?Company
     {
         return $this->company;
     }
 
+    /**
+     * @param Company|null $company
+     * @return Personnal
+     */
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
