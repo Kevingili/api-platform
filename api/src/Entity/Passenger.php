@@ -23,11 +23,13 @@ class Passenger
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $lastname;
 
@@ -39,6 +41,7 @@ class Passenger
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime
      */
     private $birthdate;
 

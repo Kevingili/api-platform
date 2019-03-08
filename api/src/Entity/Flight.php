@@ -17,6 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Flight
 {
     /**
+     * @var integer id
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -24,18 +25,21 @@ class Flight
     private $id;
 
     /**
+     * @var integer number
      * @ORM\Column(type="integer")
      * @Assert\Length(min=4, max=8)
      */
     private $number;
 
     /**
+     * @var DateTime departureDate
      * @ORM\Column(type="datetime")
      * @Assert\DateTime
      */
     private $departureDate;
 
     /**
+     * @var DateTime arrivalDate
      * @ORM\Column(type="datetime")
      * @Assert\DateTime
      * @Assert\GreaterThanOrEqual(propertyPath="departureDate")
@@ -44,26 +48,31 @@ class Flight
     private $arrivalDate;
 
     /**
+     * @var Plane plane
      * @ORM\ManyToOne(targetEntity="App\Entity\Plane", inversedBy="flight")
      */
     private $plane;
 
     /**
+     * @var Personnal personnals
      * @ORM\ManyToMany(targetEntity="App\Entity\Personnal", mappedBy="flight")
      */
     private $personnals;
 
     /**
+     * @var Passenger passenger
      * @ORM\OneToMany(targetEntity="App\Entity\Passenger", mappedBy="flight")
      */
     private $passenger;
 
     /**
+     * @var Airport departureAirport
      * @ORM\ManyToOne(targetEntity="App\Entity\Airport", inversedBy="flightsDeparture")
      */
     private $departureAirport;
 
     /**
+     * @var Airport arrivalAirport
      * @ORM\ManyToOne(targetEntity="App\Entity\Airport", inversedBy="flightsArrival")
      */
     private $arrivalAirport;

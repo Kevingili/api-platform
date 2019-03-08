@@ -16,7 +16,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     normalizationContext={"groups"={"read"}},
  *     denormalizationContext={"groups"={"write"}}
  * )
- * @UniqueEntity(fields={"email"})
+ * @UniqueEntity(fields={"email"},message="Soyez un peu original sur l'adresse mail :)")
  *
  */
 class User implements UserInterface
@@ -53,12 +53,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read", "write"})
+     * @Assert\NotBlank
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read", "write"})
+     * @Assert\NotBlank
      */
     private $lastname;
 
